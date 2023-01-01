@@ -13,11 +13,11 @@ export function createCard (card:ICardProps):ICard {
 
     const {type,imgSrc,value} = card;
 
-    return Object.create({
+    return {
         type,
         imgSrc,
         value,
         rank: getCardRank(value)
-    })
+    }
 
 }
