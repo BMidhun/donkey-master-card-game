@@ -1,0 +1,18 @@
+import { CARD_VALUES_ENUM } from "../enums";
+
+
+export const cardRank = {
+    [CARD_VALUES_ENUM.TWO] : 0,
+    [CARD_VALUES_ENUM.THREE] : 1,
+    [CARD_VALUES_ENUM.FOUR] : 2,
+    [CARD_VALUES_ENUM.FIVE] : 3,
+    [CARD_VALUES_ENUM.SIX] : 4,
+    [CARD_VALUES_ENUM.SEVEN] : 5,
+    [CARD_VALUES_ENUM.EIGHT]: 6,
+    [CARD_VALUES_ENUM.NINE] : 7,
+    [CARD_VALUES_ENUM.TEN] : 8,
+    [CARD_VALUES_ENUM.JACK] : 9,
+    [CARD_VALUES_ENUM.QUEEN]: 10,
+    [CARD_VALUES_ENUM.KING] : 11,
+    [CARD_VALUES_ENUM.ACE] : 12 
+}

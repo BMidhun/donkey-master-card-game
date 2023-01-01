@@ -1,0 +1,23 @@
+import { CARD_TYPE_ENUM, CARD_VALUES_ENUM } from "../enums"
+import { ICard } from "../interface/card";
+import { getCardRank } from "../utils";
+
+interface ICardProps {
+    type: CARD_TYPE_ENUM
+    imgSrc?: string
+    value: CARD_VALUES_ENUM,
+    rank: number
+}
+
+export function createCard (card:ICardProps):ICard {
+
+    const {type,imgSrc,value} = card;
+
+    return Object.create({
+        type,
+        imgSrc,
+        value,
+        rank: getCardRank(value)
+    })
+
+}
