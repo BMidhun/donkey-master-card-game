@@ -1,5 +1,6 @@
 import { createCard } from "../entities/card";
 import { cardRank } from "../entities/card-rank";
+import { cardSet } from "../entities/card-set";
 import { CARD_TYPE_ENUM, CARD_VALUES_ENUM } from "../enums";
 import { ICard } from "../interface/card";
 
@@ -32,4 +33,21 @@ function generateCardsOfType(type:CARD_TYPE_ENUM) {
     })
 
     return cards;
+}
+
+
+export function shuffleCards():ICard[] {
+    const arr = cardSet.slice();
+    const len = arr.length;
+    for(let i=0; i< len; i++) {
+        let j = Math.floor(len * Math.random());
+        if(i===j)
+            continue;
+
+        let temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = arr[j];
+    }
+
+    return arr;
 }
