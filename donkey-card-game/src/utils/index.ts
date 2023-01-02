@@ -46,7 +46,7 @@ export function shuffleCards():ICard[] {
 
         let temp = arr[j];
         arr[j] = arr[i];
-        arr[i] = arr[j];
+        arr[i] = temp;
     }
 
     return arr;
