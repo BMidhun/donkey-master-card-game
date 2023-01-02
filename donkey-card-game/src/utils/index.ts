@@ -4,44 +4,48 @@ import { cardSet } from "../entities/card-set";
 import { CARD_TYPE_ENUM, CARD_VALUES_ENUM } from "../enums";
 import { ICard } from "../interface/card";
 
-export function getCardRank(value:CARD_VALUES_ENUM):number {
+export function getCardRank(value: CARD_VALUES_ENUM): number {
     return cardRank[value];
 }
 
 
-export function generateCards() {
-    const cardsOfSpade = generateCardsOfType(CARD_TYPE_ENUM.SPADE);
-    const cardsOfClubs = generateCardsOfType(CARD_TYPE_ENUM.CLUBS);
-    const cardsOfHeart = generateCardsOfType(CARD_TYPE_ENUM.HEART);
-    const cardsOfDiamond = generateCardsOfType(CARD_TYPE_ENUM.DIAMOND);
+export async function generateCards() {
+    const cardsOfSpade = await generateCardsOfType(CARD_TYPE_ENUM.SPADE);
+    const cardsOfClubs = await generateCardsOfType(CARD_TYPE_ENUM.CLUBS);
+    const cardsOfHeart = await generateCardsOfType(CARD_TYPE_ENUM.HEART);
+    const cardsOfDiamond = await generateCardsOfType(CARD_TYPE_ENUM.DIAMOND);
 
-    return [...cardsOfSpade,...cardsOfClubs,...cardsOfDiamond, ...cardsOfHeart];
+    return [...cardsOfSpade, ...cardsOfClubs, ...cardsOfDiamond, ...cardsOfHeart];
 }
 
 
-function generateCardsOfType(type:CARD_TYPE_ENUM) {
-    const cards:ICard[] = [];
+async function generateCardsOfType(type: CARD_TYPE_ENUM): Promise<ICard[]> {
+    let cards: ICard[] = [];
 
-    Object.keys(cardRank).forEach((key) => {
+    const cardRanks = Object.keys(cardRank);
+
+    for await (let key of cardRanks) {
         const k = (key as unknown) as CARD_VALUES_ENUM;
-        const card:ICard = createCard({
+        const card: ICard = await createCard({
             rank: cardRank[k],
             type,
-            value: k
+            value: k,
+            imgSrc: await getCardImg(type, k)
         });
         cards.push(card);
-    })
+    }
 
     return cards;
+
 }
 
 
-export function shuffleCards():ICard[] {
-    const arr = cardSet.slice();
+export async function shuffleCards(): Promise<ICard[]> {
+    const arr = (await cardSet).slice();
     const len = arr.length;
-    for(let i=0; i< len; i++) {
+    for (let i = 0; i < len; i++) {
         let j = Math.floor(len * Math.random());
-        if(i===j)
+        if (i === j)
             continue;
 
         let temp = arr[j];
@@ -50,4 +54,15 @@ export function shuffleCards():ICard[] {
     }
 
     return arr;
+}
+
+
+export function getCardImg(type: CARD_TYPE_ENUM, key: CARD_VALUES_ENUM) {
+    try {
+        const cardSrcImg = import(`../assets/cards/${type.toLowerCase()}/${type + '_' + key}.svg`);
+        return cardSrcImg;
+    } catch (error) {
+        return '';
+    }
+
 }

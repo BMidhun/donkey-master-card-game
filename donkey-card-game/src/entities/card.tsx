@@ -9,7 +9,7 @@ interface ICardProps {
     rank: number
 }
 
-export function createCard (card:ICardProps):ICard {
+export async function createCard (card:ICardProps):Promise<ICard> {
 
     const {type,imgSrc,value} = card;
 
