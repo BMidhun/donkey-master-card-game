@@ -11,11 +11,11 @@ export function getCardRank(value:CARD_VALUES_ENUM):number {
 
 export function generateCards() {
     const cardsOfSpade = generateCardsOfType(CARD_TYPE_ENUM.SPADE);
-    const cardsOfClaver = generateCardsOfType(CARD_TYPE_ENUM.CLAVER);
+    const cardsOfClubs = generateCardsOfType(CARD_TYPE_ENUM.CLUBS);
     const cardsOfHeart = generateCardsOfType(CARD_TYPE_ENUM.HEART);
     const cardsOfDiamond = generateCardsOfType(CARD_TYPE_ENUM.DIAMOND);
 
-    return [...cardsOfSpade,...cardsOfClaver,...cardsOfDiamond, ...cardsOfHeart];
+    return [...cardsOfSpade,...cardsOfClubs,...cardsOfDiamond, ...cardsOfHeart];
 }
 
 

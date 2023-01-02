@@ -1,6 +1,6 @@
 export enum CARD_TYPE_ENUM {
     SPADE = 'SPADE',
-    CLAVER = 'CLAVER',
+    CLUBS = 'CLUBS',
     HEART = 'HEART',
     DIAMOND = 'DIAMOND'
 }
