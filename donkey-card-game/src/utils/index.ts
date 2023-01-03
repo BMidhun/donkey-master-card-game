@@ -1,7 +1,7 @@
 import { createCard } from "../entities/card";
 import { cardRank } from "../entities/card-rank";
 import { cardSet } from "../entities/card-set";
-import { CARD_TYPE_ENUM, CARD_VALUES_ENUM } from "../enums";
+import { CARD_TYPE_ENUM, CARD_VALUES_ENUM, PLAYERS } from "../enums";
 import { ICard } from "../interface/card";
 
 export function getCardRank(value: CARD_VALUES_ENUM): number {
@@ -65,4 +65,17 @@ export function getCardImg(type: CARD_TYPE_ENUM, key: CARD_VALUES_ENUM) {
         return '';
     }
 
+}
+
+
+export function initPlayerCue(cards: ICard[]):PLAYERS {
+    const index = cards.findIndex((card) => card.type === CARD_TYPE_ENUM.SPADE && card.value === CARD_VALUES_ENUM.ACE);
+    if (index < 13)
+        return PLAYERS.HUMAN;
+    else if (index >= 13 && index < 26)
+        return PLAYERS.COM1;
+    else if (index >= 26 && index < 39)
+        return PLAYERS.COM2;
+    else
+        return PLAYERS.COM3;
 }
