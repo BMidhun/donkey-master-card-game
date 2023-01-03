@@ -13,15 +13,18 @@ function App() {
   const {gameState, currentPlayer, setCurrentPlayer } = useGameInit();
   const [table,setTable] = useState<ITable>([]);
 
+
   return (
     <div>
-      {gameState.map((player) => {
-        const {playerHand,type} = player
-        if(type === PLAYERS.HUMAN)
-         return <PlayerContainer isCurrentPlayer={currentPlayer === type} playerCards={playerHand} playerId={type} key={type}></PlayerContainer>
-        else
-          return <ComputerContainer isCurrentPlayer={currentPlayer === type} playerCards={playerHand} playerId={type} key={type}/>
-      })}
+      <ComputerContainer playerId={PLAYERS.COM1} playerCards={gameState[PLAYERS.COM1]} isCurrentPlayer={currentPlayer === PLAYERS.COM1}/>
+      <ComputerContainer playerId={PLAYERS.COM2} playerCards={gameState[PLAYERS.COM2]} isCurrentPlayer={currentPlayer === PLAYERS.COM2}/>
+      <ComputerContainer playerId={PLAYERS.COM3} playerCards={gameState[PLAYERS.COM3]} isCurrentPlayer={currentPlayer === PLAYERS.COM1}/>
+
+      <div>
+         Current Table State : {JSON.stringify(table)}
+      </div>
+
+      <PlayerContainer playerId={PLAYERS.HUMAN} playerCards={gameState[PLAYERS.HUMAN]} isCurrentPlayer={currentPlayer === PLAYERS.COM3}/>
     </div>
   )
 }
