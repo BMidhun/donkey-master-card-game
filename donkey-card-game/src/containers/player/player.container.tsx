@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { PLAYERS } from "../../enums";
 import { ICard } from "../../interface/card";
 
 interface IProps {
-    initialHand: ICard[];
+    playerCards: ICard[];
     isCurrentPlayer: boolean;
+    playerId: PLAYERS
 }
 
-function PlayerContainer({initialHand,isCurrentPlayer}:IProps) {
-
-  const [playerCards,setPlayerCards] = useState<ICard[]>(initialHand);
+function PlayerContainer({playerCards,isCurrentPlayer,playerId}:IProps) {
 
   return (
     <div>PlayerContainer : Has Ace == {JSON.stringify(isCurrentPlayer)}</div>
