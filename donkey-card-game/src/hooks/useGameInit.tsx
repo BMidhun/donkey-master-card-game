@@ -3,11 +3,22 @@ import { PLAYERS } from "../enums";
 import { ICard } from "../interface/card";
 import { initPlayerCue, shuffleCards } from "../utils";
 
-interface IGameState {
+const NUM_OF_PLAYERS = 4;
+interface IPlayerState {
     [PLAYERS.HUMAN]: ICard[],
     [PLAYERS.COM1]: ICard[],
     [PLAYERS.COM2]: ICard[],
     [PLAYERS.COM3]: ICard[]
+}
+
+interface IGameState {
+    numOfAvailablePlayers: number,
+    winners: {
+        [PLAYERS.HUMAN]:boolean,
+        [PLAYERS.COM1]: boolean,
+        [PLAYERS.COM2]: boolean,
+        [PLAYERS.COM3]: boolean,
+    }
 }
 
 
@@ -16,7 +27,7 @@ function useGameInit() {
 
         async function init() {
             const cardSet = await shuffleCards();
-            setGameState(prev => ({
+            setPlayerState(prev => ({
                 ...prev,
                 [PLAYERS.HUMAN]: cardSet.slice(0, 13),
                 [PLAYERS.COM1]: cardSet.slice(13, 26),
@@ -24,22 +35,32 @@ function useGameInit() {
                 [PLAYERS.COM3]: cardSet.slice(39, 52)
             })
             )
-            setCurrentPlayer(initPlayerCue(cardSet));
+            setCurrentPlayers(initPlayerCue(cardSet));
         }
 
         init();
 
     }, [])
 
-    const [gameState, setGameState] = useState<IGameState>({
+    const [playerState, setPlayerState] = useState<IPlayerState>({
         [PLAYERS.HUMAN]: [],
         [PLAYERS.COM1]: [],
         [PLAYERS.COM2]: [],
         [PLAYERS.COM3]: []
     });
-    const [currentPlayer, setCurrentPlayer] = useState<PLAYERS>(PLAYERS.HUMAN);
+    const [currentPlayers, setCurrentPlayers] = useState<PLAYERS[]>([]);
+    const [currentPlayerTracker,setCurrentPlayerTracker] = useState(0); 
+    const [gameState,setGameState] = useState<IGameState>({
+        numOfAvailablePlayers:NUM_OF_PLAYERS,
+        winners: {
+            [PLAYERS.HUMAN]:false,
+            [PLAYERS.COM1]: false,
+            [PLAYERS.COM2]: false,
+            [PLAYERS.COM3]: false,
+        }
+    });
 
-    return { gameState, currentPlayer, setCurrentPlayer };
+    return { playerState, currentPlayers, setCurrentPlayers,setCurrentPlayerTracker, currentPlayerTracker };
 }
 
 export default useGameInit;

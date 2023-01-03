@@ -68,14 +68,14 @@ export function getCardImg(type: CARD_TYPE_ENUM, key: CARD_VALUES_ENUM) {
 }
 
 
-export function initPlayerCue(cards: ICard[]):PLAYERS {
+export function initPlayerCue(cards: ICard[]):PLAYERS[] {
     const index = cards.findIndex((card) => card.type === CARD_TYPE_ENUM.SPADE && card.value === CARD_VALUES_ENUM.ACE);
     if (index < 13)
-        return PLAYERS.HUMAN;
+        return [PLAYERS.HUMAN,PLAYERS.COM1,PLAYERS.COM2,PLAYERS.COM3];
     else if (index >= 13 && index < 26)
-        return PLAYERS.COM1;
+        return [PLAYERS.COM1,PLAYERS.COM2,PLAYERS.COM3,PLAYERS.HUMAN];
     else if (index >= 26 && index < 39)
-        return PLAYERS.COM2;
+        return [PLAYERS.COM2,PLAYERS.COM3,PLAYERS.HUMAN,PLAYERS.COM1];
     else
-        return PLAYERS.COM3;
+        return [PLAYERS.COM3,PLAYERS.HUMAN,PLAYERS.COM1,PLAYERS.COM2];
 }

@@ -1,1 +1,3 @@
-export * from "./useGameInit";
+import useGameInit from "./useGameInit";
+
+export {useGameInit}
