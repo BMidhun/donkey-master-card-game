@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { PLAYERS } from "../../enums";
-import { ICard } from "../../interface/card";
+import { ICard, ICardSet } from "../../interface/card";
 import { ITable } from "../../interface/table";
 
 interface IProps {
-    playerCards: ICard[];
+    playerCards: ICardSet[];
     isCurrentPlayer: boolean;
     playerId: PLAYERS,
     onDeal: (player:PLAYERS, card:ICard) => void,
@@ -17,12 +17,6 @@ function selectRandomCard(cards:ICard[]) {
 }
 
 function PlayerContainer({playerCards,isCurrentPlayer,playerId, onDeal}:IProps) {
-
- useEffect(() => {
-    if(isCurrentPlayer)
-        onDeal(playerId, selectRandomCard(playerCards))
- },[isCurrentPlayer,playerCards,playerId])
-
   return (
     <div>PlayerContainer : Has Ace == {JSON.stringify(isCurrentPlayer)}</div>
   )

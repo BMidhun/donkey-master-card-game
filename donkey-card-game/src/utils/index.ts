@@ -67,6 +67,26 @@ export function getCardImg(type: CARD_TYPE_ENUM, key: CARD_VALUES_ENUM) {
 
 }
 
+export function groupCards(playerCards:ICard[]) {
+    const cardSet:{
+        [CARD_TYPE_ENUM.CLUBS]:ICard[],
+        [CARD_TYPE_ENUM.SPADE]:ICard[],
+        [CARD_TYPE_ENUM.HEART]:ICard[],
+        [CARD_TYPE_ENUM.DIAMOND]:ICard[],
+    } = {
+        [CARD_TYPE_ENUM.CLUBS]:[],
+        [CARD_TYPE_ENUM.SPADE]:[],
+        [CARD_TYPE_ENUM.HEART]:[],
+        [CARD_TYPE_ENUM.DIAMOND]:[],
+    }
+
+    for(let card of playerCards) {
+        cardSet[card.type].push(card)
+    }
+
+    return cardSet;
+}
+
 
 export function initPlayerCue(cards: ICard[]):PLAYERS[] {
     const index = cards.findIndex((card) => card.type === CARD_TYPE_ENUM.SPADE && card.value === CARD_VALUES_ENUM.ACE);
