@@ -1,12 +1,12 @@
-import { PLAYERS } from "../../enums";
+import { PLAYERS_ENUM } from "../../enums";
 import { ICard, ICardSet } from "../../interface/card";
 import { ITable } from "../../interface/table";
 
 interface IProps {
     playerCards: ICardSet;
     isCurrentPlayer: boolean;
-    playerId: PLAYERS,
-    onDeal: (player:PLAYERS, card:ICard) => void,
+    playerId: PLAYERS_ENUM,
+    onDeal: (player:PLAYERS_ENUM, card:ICard) => void,
     table:ITable
 }
 
