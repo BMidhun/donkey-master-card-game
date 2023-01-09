@@ -31,7 +31,7 @@ function useGameInit() {
                 [PLAYERS_ENUM.COM3]: groupCards(cardSet.slice(39, 52))
             })
             )
-            setCurrentPlayers(initPlayerCue(cardSet));
+            setCurrentPlayOrder(initPlayerCue(cardSet));
         }
 
         init();
@@ -64,7 +64,7 @@ function useGameInit() {
         [CARD_TYPE_ENUM.DIAMOND]:[],
     }
     });
-    const [currentPlayers, setCurrentPlayers] = useState<PLAYERS_ENUM[]>([]);
+    const [currentPlayOrder, setCurrentPlayOrder] = useState<PLAYERS_ENUM[]>([]);
     const [currentPlayerTracker,setCurrentPlayerTracker] = useState(0); 
     const [gameState,setGameState] = useState<IGameState>({
         numOfAvailablePlayers:NUM_OF_PLAYERS,
@@ -76,7 +76,31 @@ function useGameInit() {
         }
     });
 
-    return { playerState, currentPlayers, setCurrentPlayers,setCurrentPlayerTracker, currentPlayerTracker };
+    function changePlayOrderTracker() {
+        setCurrentPlayerTracker(prev => {
+            if(prev === currentPlayOrder.length - 1)
+                return 0;
+            else
+                return prev + 1
+        })
+    }
+
+    function popPlayer(player:PLAYERS_ENUM) {
+        setCurrentPlayOrder(prev => prev.filter(val => val !== player));
+        setGameState(prev => {
+            return {
+                ...prev,
+                numOfAvailablePlayers: prev.numOfAvailablePlayers - 1,
+                winners: {
+                    ...prev.winners,
+                    [player]: true
+                }
+            }
+        })
+    }
+
+
+    return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer };
 }
 
 export default useGameInit;

@@ -99,8 +99,3 @@ export function initPlayerCue(cards: ICard[]):PLAYERS_ENUM[] {
     else
         return [PLAYERS_ENUM.COM3,PLAYERS_ENUM.HUMAN,PLAYERS_ENUM.COM1,PLAYERS_ENUM.COM2];
 }
-
-
-function setPlayOrder(order:PLAYERS_ENUM[]) {
-
-}
