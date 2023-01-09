@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CARD_TYPE_ENUM, PLAYERS } from "../enums";
+import { CARD_TYPE_ENUM, PLAYERS_ENUM } from "../enums";
 import { ICard } from "../interface/card";
 import { IPlayerState } from "../interface/player";
 import { groupCards, initPlayerCue, shuffleCards } from "../utils";
@@ -10,10 +10,10 @@ const NUM_OF_PLAYERS = 4;
 interface IGameState {
     numOfAvailablePlayers: number,
     winners: {
-        [PLAYERS.HUMAN]:boolean,
-        [PLAYERS.COM1]: boolean,
-        [PLAYERS.COM2]: boolean,
-        [PLAYERS.COM3]: boolean,
+        [PLAYERS_ENUM.HUMAN]:boolean,
+        [PLAYERS_ENUM.COM1]: boolean,
+        [PLAYERS_ENUM.COM2]: boolean,
+        [PLAYERS_ENUM.COM3]: boolean,
     }
 }
 
@@ -25,10 +25,10 @@ function useGameInit() {
             const cardSet = await shuffleCards();
             setPlayerState(prev => ({
                 ...prev,
-                [PLAYERS.HUMAN]: groupCards(cardSet.slice(0, 13)),
-                [PLAYERS.COM1]: groupCards(cardSet.slice(13, 26)),
-                [PLAYERS.COM2]: groupCards(cardSet.slice(26, 39)),
-                [PLAYERS.COM3]: groupCards(cardSet.slice(39, 52))
+                [PLAYERS_ENUM.HUMAN]: groupCards(cardSet.slice(0, 13)),
+                [PLAYERS_ENUM.COM1]: groupCards(cardSet.slice(13, 26)),
+                [PLAYERS_ENUM.COM2]: groupCards(cardSet.slice(26, 39)),
+                [PLAYERS_ENUM.COM3]: groupCards(cardSet.slice(39, 52))
             })
             )
             setCurrentPlayers(initPlayerCue(cardSet));
@@ -39,40 +39,40 @@ function useGameInit() {
     }, [])
 
     const [playerState, setPlayerState] = useState<IPlayerState>({
-        [PLAYERS.HUMAN]: {
+        [PLAYERS_ENUM.HUMAN]: {
         [CARD_TYPE_ENUM.CLUBS]:[],
         [CARD_TYPE_ENUM.SPADE]:[],
         [CARD_TYPE_ENUM.HEART]:[],
         [CARD_TYPE_ENUM.DIAMOND]:[],
     },
-        [PLAYERS.COM1]: {
+        [PLAYERS_ENUM.COM1]: {
         [CARD_TYPE_ENUM.CLUBS]:[],
         [CARD_TYPE_ENUM.SPADE]:[],
         [CARD_TYPE_ENUM.HEART]:[],
         [CARD_TYPE_ENUM.DIAMOND]:[],
     },
-        [PLAYERS.COM2]: {
+        [PLAYERS_ENUM.COM2]: {
         [CARD_TYPE_ENUM.CLUBS]:[],
         [CARD_TYPE_ENUM.SPADE]:[],
         [CARD_TYPE_ENUM.HEART]:[],
         [CARD_TYPE_ENUM.DIAMOND]:[],
     },
-        [PLAYERS.COM3]: {
+        [PLAYERS_ENUM.COM3]: {
         [CARD_TYPE_ENUM.CLUBS]:[],
         [CARD_TYPE_ENUM.SPADE]:[],
         [CARD_TYPE_ENUM.HEART]:[],
         [CARD_TYPE_ENUM.DIAMOND]:[],
     }
     });
-    const [currentPlayers, setCurrentPlayers] = useState<PLAYERS[]>([]);
+    const [currentPlayers, setCurrentPlayers] = useState<PLAYERS_ENUM[]>([]);
     const [currentPlayerTracker,setCurrentPlayerTracker] = useState(0); 
     const [gameState,setGameState] = useState<IGameState>({
         numOfAvailablePlayers:NUM_OF_PLAYERS,
         winners: {
-            [PLAYERS.HUMAN]:false,
-            [PLAYERS.COM1]: false,
-            [PLAYERS.COM2]: false,
-            [PLAYERS.COM3]: false,
+            [PLAYERS_ENUM.HUMAN]:false,
+            [PLAYERS_ENUM.COM1]: false,
+            [PLAYERS_ENUM.COM2]: false,
+            [PLAYERS_ENUM.COM3]: false,
         }
     });
 

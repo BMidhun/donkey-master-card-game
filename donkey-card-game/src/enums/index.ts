@@ -21,7 +21,7 @@ export enum CARD_VALUES_ENUM {
     KING = 'KING'
 }
 
-export enum PLAYERS {
+export enum PLAYERS_ENUM {
     HUMAN,
     COM1,
     COM2,

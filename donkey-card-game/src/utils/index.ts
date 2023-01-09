@@ -1,7 +1,7 @@
 import { createCard } from "../entities/card";
 import { cardRank } from "../entities/card-rank";
 import { cardSet } from "../entities/card-set";
-import { CARD_TYPE_ENUM, CARD_VALUES_ENUM, PLAYERS } from "../enums";
+import { CARD_TYPE_ENUM, CARD_VALUES_ENUM, PLAYERS_ENUM } from "../enums";
 import { ICard } from "../interface/card";
 
 export function getCardRank(value: CARD_VALUES_ENUM): number {
@@ -88,14 +88,19 @@ export function groupCards(playerCards:ICard[]) {
 }
 
 
-export function initPlayerCue(cards: ICard[]):PLAYERS[] {
+export function initPlayerCue(cards: ICard[]):PLAYERS_ENUM[] {
     const index = cards.findIndex((card) => card.type === CARD_TYPE_ENUM.SPADE && card.value === CARD_VALUES_ENUM.ACE);
     if (index < 13)
-        return [PLAYERS.HUMAN,PLAYERS.COM1,PLAYERS.COM2,PLAYERS.COM3];
+        return [PLAYERS_ENUM.HUMAN,PLAYERS_ENUM.COM1,PLAYERS_ENUM.COM2,PLAYERS_ENUM.COM3];
     else if (index >= 13 && index < 26)
-        return [PLAYERS.COM1,PLAYERS.COM2,PLAYERS.COM3,PLAYERS.HUMAN];
+        return [PLAYERS_ENUM.COM1,PLAYERS_ENUM.COM2,PLAYERS_ENUM.COM3,PLAYERS_ENUM.HUMAN];
     else if (index >= 26 && index < 39)
-        return [PLAYERS.COM2,PLAYERS.COM3,PLAYERS.HUMAN,PLAYERS.COM1];
+        return [PLAYERS_ENUM.COM2,PLAYERS_ENUM.COM3,PLAYERS_ENUM.HUMAN,PLAYERS_ENUM.COM1];
     else
-        return [PLAYERS.COM3,PLAYERS.HUMAN,PLAYERS.COM1,PLAYERS.COM2];
+        return [PLAYERS_ENUM.COM3,PLAYERS_ENUM.HUMAN,PLAYERS_ENUM.COM1,PLAYERS_ENUM.COM2];
+}
+
+
+function setPlayOrder(order:PLAYERS_ENUM[]) {
+
 }
