@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ComputerContainer from "./containers/computer/computer.container";
 import PlayerContainer from "./containers/player/player.container";
 import { PLAYERS_ENUM } from "./enums";
@@ -15,6 +15,11 @@ function App() {
   const [table, setTable] = useState<ITable>([]);
 
   console.log(currentPlayOrder, currentPlayerTracker);
+
+  useEffect(() => {
+     if(gameState.numOfAvailablePlayers === 1)
+      window.alert("Game over");
+  },[gameState])
 
   function compareTable(currentTable:ITable):ITableEntity | undefined {
      // check card's type on table. If same then return currentTable, else add logic to push the hit cards to the player who got hit.
@@ -50,12 +55,14 @@ function App() {
     
     if(!hit && currentTable.length !== gameState.numOfAvailablePlayers)
       {
+        console.log("Normal play");
         changePlayOrderTracker();
         setTable(currentTable);
         return;
       }
 
     if(!hit && currentTable.length === gameState.numOfAvailablePlayers) {
+      console.log("Round complete");
       const newRoundPlayer = currentTable.sort((a,b) => b.card.rank - a.card.rank)[0];
       changePlayOrderTracker(newRoundPlayer.player);
       clearTable();
@@ -63,6 +70,7 @@ function App() {
     }
 
     if(hit){
+      console.log("Hit!!")
       const penalties = currentTable.map(item => item.card);
       addCardsOnHit(hit.player, penalties);
       clearTable();
