@@ -4,33 +4,72 @@ import PlayerContainer from "./containers/player/player.container";
 import { PLAYERS_ENUM } from "./enums";
 import {useGameInit} from "./hooks";
 import { ICard } from "./interface/card";
-import { ITable } from "./interface/table";
+import { ITable, ITableEntity } from "./interface/table";
 
 
 
 
 function App() {
 
-  const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, removeCardOnDeal, addCardsOnHit } = useGameInit();
+  const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, removeCardOnDeal, addCardsOnHit, gameState } = useGameInit();
   const [table, setTable] = useState<ITable>([]);
 
   console.log(currentPlayOrder, currentPlayerTracker);
 
-  function compareTable(currentTable:ITable) {
+  function compareTable(currentTable:ITable):ITableEntity | undefined {
      // check card's type on table. If same then return currentTable, else add logic to push the hit cards to the player who got hit.
-     
+    if(currentTable.length === 1)
+      return;
+
+    let isHit = false;
+    const compareItem = currentTable[0];
+    for(let item of currentTable) {
+      if(item.card.type !== compareItem.card.type)
+         {
+           isHit = true;
+           break;
+         }
+    }
+    if(!isHit)
+      return;
+    
+    const hitCards = currentTable.filter(item => item.card.type === compareItem.card.type);
+    const sortHitCards = hitCards.sort((a,b) => b.card.rank - a.card.rank);
+
+    return sortHitCards[0];
+  }
+
+  function clearTable() {
+    setTable([]);
   }
 
   const onDeal = (player: PLAYERS_ENUM, card: ICard) => {
     let currentTable:ITable = [...table,{player,card}];
     removeCardOnDeal(player,card);
-    if(currentTable.length === 1)
+    const hit = compareTable(currentTable);
+    
+    if(!hit && currentTable.length !== gameState.numOfAvailablePlayers)
       {
         changePlayOrderTracker();
         setTable(currentTable);
         return;
       }
-    
+
+    if(!hit && currentTable.length === gameState.numOfAvailablePlayers) {
+      const newRoundPlayer = currentTable.sort((a,b) => b.card.rank - a.card.rank)[0];
+      changePlayOrderTracker(newRoundPlayer.player);
+      clearTable();
+      return;
+    }
+
+    if(hit){
+      const penalties = currentTable.map(item => item.card);
+      addCardsOnHit(hit.player, penalties);
+      clearTable();
+      changePlayOrderTracker(hit.player);
+      return;
+    }
+  
   }
 
   return (
