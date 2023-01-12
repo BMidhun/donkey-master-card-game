@@ -2,10 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+html{
+  height: 100%;
+}
 
 body {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  height: 100%;
+  margin: 0;
 }
 
+#root{
+  height: 100%;
+}
 
 
