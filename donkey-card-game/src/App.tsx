@@ -11,14 +11,26 @@ import { ITable } from "./interface/table";
 
 function App() {
 
-  const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker } = useGameInit();
+  const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, removeCardOnDeal, addCardsOnHit } = useGameInit();
   const [table, setTable] = useState<ITable>([]);
 
   console.log(currentPlayOrder, currentPlayerTracker);
 
+  function compareTable(currentTable:ITable) {
+     // check card's type on table. If same then return currentTable, else add logic to push the hit cards to the player who got hit.
+     
+  }
+
   const onDeal = (player: PLAYERS_ENUM, card: ICard) => {
-    setTable(prev => [...prev, { card, player }]);
-    changePlayOrderTracker();
+    let currentTable:ITable = [...table,{player,card}];
+    removeCardOnDeal(player,card);
+    if(currentTable.length === 1)
+      {
+        changePlayOrderTracker();
+        setTable(currentTable);
+        return;
+      }
+    
   }
 
   return (

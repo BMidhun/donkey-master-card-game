@@ -1,8 +1,8 @@
-import { PLAYERS } from "../enums"
+import { PLAYERS_ENUM } from "../enums"
 import { ICard } from "./card"
 
 interface ITableEntity {
-    player: PLAYERS,
+    player: PLAYERS_ENUM,
     card: ICard
 }
 

@@ -99,8 +99,27 @@ function useGameInit() {
         })
     }
 
+    function removeCardOnDeal (player:PLAYERS_ENUM, card:ICard) {
+        setPlayerState(prev => ({
+            ...prev,
+            [player] : {
+                ...prev[player],
+                [card.type] : prev[player][card.type].filter(_card => _card.value === card.value)
+            }
+        }))
+    }
 
-    return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer };
+    function addCardsOnHit(player:PLAYERS_ENUM, cards:ICard[]) {
+        const cardSets = {...playerState[player]};
+        for(let card of cards) {
+            cardSets[card.type] = [...cardSets[card.type], card];
+        }
+
+        setPlayerState(prev => ({...prev, [player]: cardSets }));
+    }
+
+
+    return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer, removeCardOnDeal, addCardsOnHit };
 }
 
 export default useGameInit;
