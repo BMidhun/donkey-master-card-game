@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { TableComponent } from "./components";
 import ComputerContainer from "./containers/computer/computer.container";
 import PlayerContainer from "./containers/player/player.container";
 import { PLAYERS_ENUM } from "./enums";
@@ -79,16 +80,14 @@ function App() {
   }
 
   return (
-    <div className="h-full max-w-lg mx-auto bg-fuchsia-800 p-4">
+    <div className="h-full max-w-lg mx-auto bg-fuchsia-800 p-4 flex flex-col items-between justify-between">
       <div className="flex items-center justify-between mt-4">
         <ComputerContainer playerId={PLAYERS_ENUM.COM1} playerCards={playerState[PLAYERS_ENUM.COM1]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM1} onDeal={onDeal} table={table} />
         <ComputerContainer playerId={PLAYERS_ENUM.COM2} playerCards={playerState[PLAYERS_ENUM.COM2]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM2} onDeal={onDeal} table={table} />
         <ComputerContainer playerId={PLAYERS_ENUM.COM3} playerCards={playerState[PLAYERS_ENUM.COM3]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM3} onDeal={onDeal} table={table} />
       </div>
 
-      <div>
-
-      </div>
+      <TableComponent table={table}/>
 
       <PlayerContainer playerId={PLAYERS_ENUM.HUMAN} playerCards={playerState[PLAYERS_ENUM.HUMAN]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.HUMAN} onDeal={onDeal} table={table} />
     </div>
