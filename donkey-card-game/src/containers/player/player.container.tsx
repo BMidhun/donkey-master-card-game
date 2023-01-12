@@ -22,7 +22,7 @@ function PlayerContainer({playerCards,isCurrentPlayer,playerId, onDeal,table}:IP
   //   }    
   // },[isCurrentPlayer, playerCards, table])
   return (
-    <div>PlayerContainer : Has Ace == {JSON.stringify(isCurrentPlayer)}</div>
+    <div></div>
   )
 }
 

@@ -25,7 +25,7 @@ function ComputerContainer({playerCards,isCurrentPlayer,playerId,onDeal,table}:I
   // },[isCurrentPlayer, playerCards])
 
   return (
-    <div>ComputerContainer {playerId} : Has Ace == {JSON.stringify(isCurrentPlayer)}</div>
+   <div></div>
   )
 }
 
