@@ -23,8 +23,8 @@ function useGameInit() {
 
     const [playerState, setPlayerState] = useState<IPlayerState>({
         [PLAYERS_ENUM.HUMAN]: {
-            [CARD_TYPE_ENUM.CLUBS]: [],
             [CARD_TYPE_ENUM.SPADE]: [],
+            [CARD_TYPE_ENUM.CLUBS]: [],
             [CARD_TYPE_ENUM.HEART]: [],
             [CARD_TYPE_ENUM.DIAMOND]: [],
         },

@@ -18,7 +18,7 @@ function PlayerContainer({playerCards,isCurrentPlayer,playerId, onDeal,table}:IP
   // useEffect(() => {
   //   if(isCurrentPlayer) {
   //     const card = (table.length === 1 || table.length===0) ? selectRandomCard(playerCards) : selectDealOrHitCard(table[0].card.type, playerCards);
-  //     setTimeout(() => {onDeal(playerId,card);},3000)
+  //     onDeal(playerId,card);
       
   //   }    
   // },[isCurrentPlayer, playerCards, table])

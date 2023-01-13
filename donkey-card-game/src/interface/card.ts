@@ -10,8 +10,8 @@ export interface ICard {
 
 
 export interface ICardSet {
-    [CARD_TYPE_ENUM.CLUBS]:ICard[],
     [CARD_TYPE_ENUM.SPADE]:ICard[],
+    [CARD_TYPE_ENUM.CLUBS]:ICard[],
     [CARD_TYPE_ENUM.HEART]:ICard[],
     [CARD_TYPE_ENUM.DIAMOND]:ICard[],
 }

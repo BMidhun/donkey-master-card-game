@@ -69,13 +69,15 @@ export function getCardImg(type: CARD_TYPE_ENUM, key: CARD_VALUES_ENUM) {
 
 export function groupCards(playerCards:ICard[]) {
     const cardSet:{
-        [CARD_TYPE_ENUM.CLUBS]:ICard[],
+        
         [CARD_TYPE_ENUM.SPADE]:ICard[],
+        [CARD_TYPE_ENUM.CLUBS]:ICard[],
         [CARD_TYPE_ENUM.HEART]:ICard[],
         [CARD_TYPE_ENUM.DIAMOND]:ICard[],
     } = {
-        [CARD_TYPE_ENUM.CLUBS]:[],
+        
         [CARD_TYPE_ENUM.SPADE]:[],
+        [CARD_TYPE_ENUM.CLUBS]:[],
         [CARD_TYPE_ENUM.HEART]:[],
         [CARD_TYPE_ENUM.DIAMOND]:[],
     }
@@ -124,4 +126,16 @@ export function selectDealOrHitCard(type:CARD_TYPE_ENUM, cardSet:ICardSet):ICard
     const index = Math.floor(cards.length * Math.random());
 
     return cards[index];
+}
+
+export function getPlayerColor (player:PLAYERS_ENUM) : string {
+    switch(player) {
+      
+        
+        case PLAYERS_ENUM.HUMAN : return "border-lime-600";
+        case PLAYERS_ENUM.COM1 : return "border-orange-600";
+        case PLAYERS_ENUM.COM2 : return "border-cyan-600";
+        case PLAYERS_ENUM.COM3 : return "border-indigo-600";
+        default: return ""
+    }
 }
