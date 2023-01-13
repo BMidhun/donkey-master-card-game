@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import PlayerDeckComponent from "../../components/playerDeck.component";
 import { PLAYERS_ENUM } from "../../enums";
 import { ICard, ICardSet } from "../../interface/card";
 import { ITable } from "../../interface/table";
@@ -22,7 +23,7 @@ function PlayerContainer({playerCards,isCurrentPlayer,playerId, onDeal,table}:IP
   //   }    
   // },[isCurrentPlayer, playerCards, table])
   return (
-    <div></div>
+    <PlayerDeckComponent playerCards={playerCards}/>
   )
 }
 

@@ -80,8 +80,8 @@ function App() {
   }
 
   return (
-    <div className="h-full max-w-lg mx-auto bg-fuchsia-800 p-4 flex flex-col items-between justify-between">
-      <div className="flex items-center justify-between mt-4">
+    <div className="h-full max-w-lg mx-auto bg-fuchsia-800 p-4 flex flex-col">
+      <div className="flex items-center justify-between grow">
         <ComputerContainer playerId={PLAYERS_ENUM.COM1} playerCards={playerState[PLAYERS_ENUM.COM1]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM1} onDeal={onDeal} table={table} />
         <ComputerContainer playerId={PLAYERS_ENUM.COM2} playerCards={playerState[PLAYERS_ENUM.COM2]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM2} onDeal={onDeal} table={table} />
         <ComputerContainer playerId={PLAYERS_ENUM.COM3} playerCards={playerState[PLAYERS_ENUM.COM3]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM3} onDeal={onDeal} table={table} />

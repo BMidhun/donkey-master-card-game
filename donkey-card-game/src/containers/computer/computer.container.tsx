@@ -25,7 +25,7 @@ function ComputerContainer({playerCards,isCurrentPlayer,playerId,onDeal,table}:I
   // },[isCurrentPlayer, playerCards])
 
   return (
-   <div className="h-40 border-4 border-white-200 bg-none w-32 mx-3 flex items-center justify-center">
+   <div className="border-4 border-white-200 bg-none w-full mx-2 h-3/5 flex items-center justify-center">
       <h1 className="text-white">COM: {playerId}</h1>
    </div>
   )
