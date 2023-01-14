@@ -9,3 +9,8 @@ export interface IGameState {
         [PLAYERS_ENUM.COM3] : boolean,
     } 
 }
+
+export interface IScreenText {
+    type: "HIT" | "ROUND",
+    message: string
+}

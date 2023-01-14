@@ -15,7 +15,7 @@ function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IPr
   let top=0;
   return (
     <>
-   {!isWinner ? <div className={`my-2 rounded-lg flex items-baseline justify-between grow overflow-auto border-4 shadow shadow-grey-400 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)} ${ highlight ? "animate-pulse": "" }`}>
+   {!isWinner ? <div className={`my-2 rounded-lg flex items-baseline justify-between grow overflow-auto border-4 shadow-md shadow-gray-700 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)} ${ highlight ? "animate-pulse": "" }`}>
         {
         Object.keys(playerCards).map(item => {
              const k = (item as unknown) as CARD_TYPE_ENUM
@@ -24,18 +24,14 @@ function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IPr
                         
                         playerCards[k].map((card, index) => {
                             top = index * 8
-                            return  <div key={card.rank} className="cursor-pointer z-30" style={{position:"absolute", top:`${top}%`, transform:"scale(0.75)"}}
-                                      onClick={() => {onCardSelect(card)}}
-                                    >
-                                        <img src={card.imgSrc?.default} className="transition ease-in hover:-translate-y-6 "></img>
-                                    </div>
+                            return <img key={card.rank} src={card.imgSrc?.default} className="transition ease-in hover:-translate-y-6 cursor-pointer z-30 absolute transform scale-75" style={{top:`${top}%`}} onClick={() => {onCardSelect(card)}}></img>
                         })}
                     </div>
         })}
     </div>
     :
 
-    <div className={`my-2 rounded-lg flex items-center justify-center grow border-4 shadow shadow-grey-400 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)}`}>
+    <div className={`my-2 rounded-lg flex items-center justify-center grow border-4 shadow-lg shadow-gray-700 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)}`}>
        <div className='absolute top-0 right-0 h-10 w-10 transform z-40'>
           <img src={Crown}  className='h-full w-full'/>
         </div>

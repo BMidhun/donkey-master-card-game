@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, ScoreCard, ScreenComponent, TableComponent } from "./components";
+import { Button, InfoComponent, ScoreCard, ScreenComponent, TableComponent } from "./components";
 import ModalComponent from "./components/modal.component";
 import ComputerContainer from "./containers/computer/computer.container";
 import PlayerContainer from "./containers/player/player.container";
@@ -68,13 +68,13 @@ function App() {
     }
 
     if (!hit && currentTable.length === gameState.numOfAvailablePlayers) {
-      setScreenText("Round Completed!");
+      setScreenText({type:"ROUND", message:"Round Completed!"});
       const newRoundPlayer = [...currentTable].sort((a, b) => b.card.rank - a.card.rank)[0];
       changePlayOrderTracker(false);
       setTable(currentTable);  
       setTimeout(() => {
         changePlayOrderTracker(newRoundPlayer.player);
-        setScreenText("");
+        setScreenText(null);
         clearTable();
       }, 2000)
    
@@ -86,12 +86,12 @@ function App() {
       const penalties = currentTable.map(item => item.card);
       changePlayOrderTracker(false);
       addCardsOnHit(hit.player, penalties);
-      setScreenText(`${hit.player} has been hit!`)
+      setScreenText({message:`${hit.player} has been hit!`, type:"HIT"})
       setTable(currentTable);
 
       setTimeout(() => {
         clearTable();
-        setScreenText("");
+        setScreenText(null);
         changePlayOrderTracker(hit.player);
       },2000)
       return;
@@ -122,7 +122,7 @@ function App() {
       </ModalComponent>
     
       <ModalComponent showModal={showInfoModal} closeModal={closeInfoModal} title="GAME INFO"> 
-         Info
+         <InfoComponent />
       </ModalComponent>
     </div>
   )

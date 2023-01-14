@@ -7,7 +7,6 @@ export default function useGameModals (gameState:IGameState) {
     const [showInfoModal, setShowInfoModal] = useState(false);
 
     useEffect(() => {
-        console.log(gameState);
         if(gameState.numOfAvailablePlayers === 1)
             setShowScoreModal(true);
     },

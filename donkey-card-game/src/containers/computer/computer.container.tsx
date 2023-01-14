@@ -45,7 +45,7 @@ function ComputerContainer({playerCards,isCurrentPlayer,playerId,onDeal,playCard
   const highlight = isCurrentPlayer && !isWinner && !hasGameCompleted;
 
   return (
-   <div className={`border-4 rounded-lg border-white-200 bg-none w-full mx-2 h-3/4 md:h-3/5 flex items-center justify-center shadow shadow-grey-500 relative ${getPlayerColor(playerId)} ${ highlight ? "animate-pulse": "" }`}>
+   <div className={`border-4 rounded-lg border-white-200 bg-none w-full mx-2 h-3/4 md:h-3/5 flex items-center justify-center shadow-md shadow-gray-700 relative ${getPlayerColor(playerId)} ${ highlight ? "animate-pulse": "" }`}>
       <h1 className="text-white">{isWinner ? "WINNER" : `${playerId}`}</h1>
       { isWinner ? <div className='absolute top-0 right-0 h-8 w-8 transform z-40'>
           <img src={Crown}  className='h-full w-full'/>

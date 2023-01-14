@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CARD_TYPE_ENUM, PLAYERS_ENUM } from "../enums";
 import { ICard } from "../interface/card";
-import { IGameState } from "../interface/game";
+import { IGameState, IScreenText } from "../interface/game";
 import { IPlayerState } from "../interface/player";
 import { groupCards, initPlayerCue, shuffleCards } from "../utils";
 
@@ -13,7 +13,7 @@ const NUM_OF_PLAYERS = 4;
 
 function useGameInit() {
     const [currentPlayOrder, setCurrentPlayOrder] = useState<PLAYERS_ENUM[]>([]);
-    const [screenText,setScreenText] = useState("");
+    const [screenText,setScreenText] = useState<IScreenText | null>(null);
     const [currentPlayerTracker, setCurrentPlayerTracker] = useState(0);
     const [gameState, setGameState] = useState<IGameState>({
         numOfAvailablePlayers: NUM_OF_PLAYERS,
