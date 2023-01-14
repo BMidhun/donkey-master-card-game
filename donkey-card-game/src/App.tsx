@@ -4,7 +4,7 @@ import ModalComponent from "./components/modal.component";
 import ComputerContainer from "./containers/computer/computer.container";
 import PlayerContainer from "./containers/player/player.container";
 import { PLAYERS_ENUM } from "./enums";
-import { useGameInit } from "./hooks";
+import { useGameInit, useGameModals } from "./hooks";
 import { ICard } from "./interface/card";
 import { ITable, ITableEntity } from "./interface/table";
 
@@ -15,6 +15,7 @@ function App() {
 
   const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, removeCardOnDeal, addCardsOnHit, gameState } = useGameInit();
   const [table, setTable] = useState<ITable>([]);
+  const {showScoreModal,closeScoreModal} = useGameModals(gameState);
 
 
   function compareTable(currentTable: ITable): ITableEntity | undefined {
@@ -107,7 +108,7 @@ function App() {
 
       <PlayerContainer playerId={PLAYERS_ENUM.HUMAN} playerCards={playerState[PLAYERS_ENUM.HUMAN]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.HUMAN} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>
 
-      <ModalComponent showModal={true} closeModal={() => {}} title="GAME STATS"> 
+      <ModalComponent showModal={showScoreModal} closeModal={closeScoreModal} title="GAME STATS"> 
         <ScoreCard gameState={gameState}/>
       </ModalComponent>
     

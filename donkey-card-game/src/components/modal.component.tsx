@@ -18,7 +18,7 @@ function ModalComponent({showModal, closeModal, children, title}:IProps) {
 
  if(ROOT)
   return createPortal(
-    <div className='filter backdrop-blur-md w-full h-full absolute z-50 flex flex-col items-center justify-center'>
+    <div className='filter backdrop-blur-md w-full h-full absolute z-50 flex flex-col items-center justify-center top-0 left-0'>
         <div className='w-10/12 mx-auto my-auto shadow max-h-96 min-h-fit overflow-auto border-2 border-gray-300 p-2 flex flex-col bg-white rounded'>
              <div className='flex items-center justify-between border-b-2 border-gray-200 pb-2'>
                 <h4 className='text-lg text-bold grow'>{title}</h4>

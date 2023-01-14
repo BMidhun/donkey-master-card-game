@@ -97,10 +97,10 @@ function useGameInit() {
         }
 
         setGameState(prev => {
-            return {
+            return prev.numOfAvailablePlayers === NUM_OF_PLAYERS - winners.length ? prev : ({
                 numOfAvailablePlayers: NUM_OF_PLAYERS - winners.length,
                 winners: newWinners
-            }
+            })
         })
     }
 
@@ -144,8 +144,8 @@ function useGameInit() {
                 winners.push(key);
              }
         }
-
-        popPlayer(winners);
+        if(winners.length)
+            popPlayer(winners);
     }
 
 

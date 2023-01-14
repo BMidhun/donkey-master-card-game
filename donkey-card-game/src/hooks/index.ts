@@ -1,3 +1,3 @@
 import useGameInit from "./useGameInit";
-
-export {useGameInit}
+import useGameModals from "./useGameModals";
+export {useGameInit, useGameModals}
