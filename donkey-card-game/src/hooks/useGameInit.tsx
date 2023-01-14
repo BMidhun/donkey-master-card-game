@@ -13,6 +13,7 @@ const NUM_OF_PLAYERS = 4;
 
 function useGameInit() {
     const [currentPlayOrder, setCurrentPlayOrder] = useState<PLAYERS_ENUM[]>([]);
+    const [screenText,setScreenText] = useState("");
     const [currentPlayerTracker, setCurrentPlayerTracker] = useState(0);
     const [gameState, setGameState] = useState<IGameState>({
         numOfAvailablePlayers: NUM_OF_PLAYERS,
@@ -130,6 +131,7 @@ function useGameInit() {
         }
     },[currentPlayerTracker])
 
+
     function checkWinner() {
         const state = {...playerState};
         let winners = [];
@@ -149,7 +151,7 @@ function useGameInit() {
     }
 
 
-    return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer, removeCardOnDeal, addCardsOnHit, gameState };
+    return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer, removeCardOnDeal, addCardsOnHit, gameState, screenText, setScreenText };
 }
 
 export default useGameInit;

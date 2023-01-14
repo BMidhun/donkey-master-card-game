@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ScoreCard, TableComponent } from "./components";
+import { Button, ScoreCard, ScreenComponent, TableComponent } from "./components";
 import ModalComponent from "./components/modal.component";
 import ComputerContainer from "./containers/computer/computer.container";
 import PlayerContainer from "./containers/player/player.container";
@@ -13,9 +13,9 @@ import { ITable, ITableEntity } from "./interface/table";
 
 function App() {
 
-  const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, removeCardOnDeal, addCardsOnHit, gameState } = useGameInit();
+  const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, removeCardOnDeal, addCardsOnHit, gameState, screenText, setScreenText } = useGameInit();
   const [table, setTable] = useState<ITable>([]);
-  const {showScoreModal,closeScoreModal} = useGameModals(gameState);
+  const {showScoreModal,closeScoreModal, openInfoModal, closeInfoModal, showInfoModal} = useGameModals(gameState);
 
 
   function compareTable(currentTable: ITable): ITableEntity | undefined {
@@ -68,11 +68,13 @@ function App() {
     }
 
     if (!hit && currentTable.length === gameState.numOfAvailablePlayers) {
+      setScreenText("Round Completed!");
       const newRoundPlayer = [...currentTable].sort((a, b) => b.card.rank - a.card.rank)[0];
       changePlayOrderTracker(false);
       setTable(currentTable);  
       setTimeout(() => {
         changePlayOrderTracker(newRoundPlayer.player);
+        setScreenText("");
         clearTable();
       }, 2000)
    
@@ -80,14 +82,16 @@ function App() {
     }
 
     if (hit) {
-      console.log("Hit!!")
+      
       const penalties = currentTable.map(item => item.card);
       changePlayOrderTracker(false);
       addCardsOnHit(hit.player, penalties);
+      setScreenText(`${hit.player} has been hit!`)
       setTable(currentTable);
 
       setTimeout(() => {
         clearTable();
+        setScreenText("");
         changePlayOrderTracker(hit.player);
       },2000)
       return;
@@ -98,7 +102,12 @@ function App() {
   return (
     <div className="h-full bg-gradient-to-r from-purple-800 to-purple-900 p-4 flex flex-col">
 
-      <div className="flex items-start justify-between grow max-h-48 md:max-h-64">
+      <div className="flex justify-between items-center my-3">
+        <ScreenComponent text={screenText}/>
+        <div className="justify-self-end ml-auto"><Button onClick={openInfoModal}>Info</Button></div>
+      </div>
+
+      <div className="flex items-center justify-between grow max-h-48 md:max-h-64">
         <ComputerContainer playerId={PLAYERS_ENUM.COM1} playerCards={playerState[PLAYERS_ENUM.COM1]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM1} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>
         <ComputerContainer playerId={PLAYERS_ENUM.COM2} playerCards={playerState[PLAYERS_ENUM.COM2]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM2} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>
         <ComputerContainer playerId={PLAYERS_ENUM.COM3} playerCards={playerState[PLAYERS_ENUM.COM3]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM3} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>
@@ -112,6 +121,9 @@ function App() {
         <ScoreCard gameState={gameState}/>
       </ModalComponent>
     
+      <ModalComponent showModal={showInfoModal} closeModal={closeInfoModal} title="GAME INFO"> 
+         Info
+      </ModalComponent>
     </div>
   )
 }

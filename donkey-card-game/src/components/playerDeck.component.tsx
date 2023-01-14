@@ -16,9 +16,6 @@ function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IPr
   return (
     <>
    {!isWinner ? <div className={`my-2 rounded-lg flex items-baseline justify-between grow overflow-auto border-4 shadow shadow-grey-400 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)} ${ highlight ? "animate-pulse": "" }`}>
-        { isWinner ? <div className='absolute top-0 right-0 h-10 w-10 transform z-40'>
-          <img src={Crown}  className='h-full w-full'/>
-        </div> : null }
         {
         Object.keys(playerCards).map(item => {
              const k = (item as unknown) as CARD_TYPE_ENUM
@@ -38,8 +35,11 @@ function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IPr
     </div>
     :
 
-    <div className={`my-2 rounded-lg flex items-center justify-center grow border-4 shadow shadow-grey-400 ${getPlayerColor(PLAYERS_ENUM.HUMAN)}`}>
-      <h4 className='text-bold text-white'>WINNER</h4>
+    <div className={`my-2 rounded-lg flex items-center justify-center grow border-4 shadow shadow-grey-400 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)}`}>
+       <div className='absolute top-0 right-0 h-10 w-10 transform z-40'>
+          <img src={Crown}  className='h-full w-full'/>
+        </div>
+        <span className='text-white text-bold'>WINNER</span>
     </div>
         
   }

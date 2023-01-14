@@ -4,6 +4,7 @@ import { IGameState } from "../interface/game";
 export default function useGameModals (gameState:IGameState) {
 
     const [showScoreModal,setShowScoreModal] = useState(false);
+    const [showInfoModal, setShowInfoModal] = useState(false);
 
     useEffect(() => {
         console.log(gameState);
@@ -17,7 +18,15 @@ export default function useGameModals (gameState:IGameState) {
         setShowScoreModal(false);
     }
 
+    function openInfoModal() {
+        setShowInfoModal(true);
+    }
 
-    return {showScoreModal, closeScoreModal}
+    function closeInfoModal() {
+        setShowInfoModal(false);
+    }
+
+
+    return {showScoreModal, closeScoreModal,openInfoModal, closeInfoModal, showInfoModal}
 
 }

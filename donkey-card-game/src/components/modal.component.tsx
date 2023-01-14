@@ -24,7 +24,7 @@ function ModalComponent({showModal, closeModal, children, title}:IProps) {
                 <h4 className='text-lg text-bold grow'>{title}</h4>
                 <div><Button onClick={closeModal}>Close</Button></div>
              </div>
-            <div className='grow p-2'>{children}</div>    
+            <div className='grow p-2 overflow-auto'>{children}</div>    
         </div>
     </div>
     ,ROOT)
