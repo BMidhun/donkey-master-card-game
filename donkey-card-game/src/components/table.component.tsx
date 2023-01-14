@@ -9,9 +9,9 @@ interface IProps {
 
 function TableComponent({table}:IProps) {
   return (
-    <div className='grow w-full border-2 flex items-center justify-between shadow shadow-cyan-500'>
+    <div className='grow w-full max-h-64 flex items-center flex-start shadow bg-gradient-to-r from-green-600 to-green-800 my-2 rounded-lg'>
         {table.map(item => {
-            return <div className={`h-40 w-32 border-white border-4 mx-2 p-2 ${getPlayerColor(item.player)}`} key={item.card.rank + item.card.value + item.card.type}>
+            return <div className={`h-1/2 border-white border-4 mx-2 p-1 rounded ${getPlayerColor(item.player)}`} key={item.card.rank + item.card.value + item.card.type}>
                     <img src={item.card.imgSrc?.default} alt="card.svg" className='h-full w-full'></img>
                   </div>
         })}

@@ -12,7 +12,7 @@ import { ITable, ITableEntity } from "./interface/table";
 
 function App() {
 
-  const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, removeCardOnDeal, addCardsOnHit, gameState, checkWinner } = useGameInit();
+  const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, removeCardOnDeal, addCardsOnHit, gameState } = useGameInit();
   const [table, setTable] = useState<ITable>([]);
 
   // console.log("CURRENT PLAYER::", currentPlayerTracker);
@@ -74,7 +74,7 @@ function App() {
     if (!hit && currentTable.length === gameState.numOfAvailablePlayers) {
       console.log("Round complete");
       // checkWinner();
-      const newRoundPlayer = currentTable.sort((a, b) => b.card.rank - a.card.rank)[0];
+      const newRoundPlayer = [...currentTable].sort((a, b) => b.card.rank - a.card.rank)[0];
       // console.log(currentTable, "NEXT ROUND PLAYER::", newRoundPlayer);
       changePlayOrderTracker(false);
       setTable(currentTable);

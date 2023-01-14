@@ -149,7 +149,7 @@ function useGameInit() {
     }
 
 
-    return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer, removeCardOnDeal, addCardsOnHit, gameState, checkWinner };
+    return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer, removeCardOnDeal, addCardsOnHit, gameState };
 }
 
 export default useGameInit;

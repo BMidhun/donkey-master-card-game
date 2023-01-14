@@ -133,8 +133,8 @@ export function getPlayerColor (player:PLAYERS_ENUM) : string {
       
         
         case PLAYERS_ENUM.HUMAN : return "border-lime-600";
-        case PLAYERS_ENUM.COM1 : return "border-orange-600";
-        case PLAYERS_ENUM.COM2 : return "border-cyan-600";
+        case PLAYERS_ENUM.COM1 : return "border-pink-600";
+        case PLAYERS_ENUM.COM2 : return "border-yellow-600";
         case PLAYERS_ENUM.COM3 : return "border-indigo-600";
         default: return ""
     }

@@ -29,8 +29,8 @@ function ComputerContainer({playerCards,isCurrentPlayer,playerId,onDeal,playCard
     if(isCurrentPlayer && !isWinner && !hasGameCompleted) {
       const card = !playCardTypeOnTable ? selectRandomCard(playerCards) : selectDealOrHitCard(playCardTypeOnTable, playerCards);
      
-      // setTimeout(() => onDeal(playerId, card) ,3000)
-      onDeal(playerId, card)
+      setTimeout(() => onDeal(playerId, card) ,2000)
+      // onDeal(playerId, card)
     }    
 
     else if(isCurrentPlayer && isWinner && !hasGameCompleted) {
@@ -45,7 +45,7 @@ function ComputerContainer({playerCards,isCurrentPlayer,playerId,onDeal,playCard
   const highlight = isCurrentPlayer && !isWinner && !hasGameCompleted;
 
   return (
-   <div className={`border-4 border-white-200 bg-none w-full mx-2 h-3/5 flex items-center justify-center shadow shadow-orange-500 ${getPlayerColor(playerId)} ${ highlight ? "animate-pulse": "" }`}>
+   <div className={`border-4 rounded-lg border-white-200 bg-none w-full mx-2 h-3/5 flex items-center justify-center shadow shadow-grey-500 ${getPlayerColor(playerId)} ${ highlight ? "animate-pulse": "" }`}>
       <h1 className="text-white">{isWinner ? "WINNER" : `COM: ${playerId}`}</h1>
    </div>
   )
