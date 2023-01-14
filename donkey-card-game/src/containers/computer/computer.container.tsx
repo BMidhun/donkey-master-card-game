@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { PLAYERS_ENUM } from "../../enums";
+import { CARD_TYPE_ENUM, PLAYERS_ENUM } from "../../enums";
 import { ICard, ICardSet } from "../../interface/card";
+import { IGameState } from "../../interface/game";
 import { ITable } from "../../interface/table";
 import { getPlayerColor, selectDealOrHitCard, selectRandomCard } from "../../utils";
 
@@ -8,21 +9,34 @@ interface IProps {
     playerCards: ICardSet;
     isCurrentPlayer: boolean;
     playerId: PLAYERS_ENUM,
-    onDeal: (player:PLAYERS_ENUM, card:ICard) => void
-    table:ITable
+    onDeal: (player:PLAYERS_ENUM, card:ICard | null) => void
+    playCardTypeOnTable: CARD_TYPE_ENUM;
+    gameState: IGameState
 }
 
 
 
-function ComputerContainer({playerCards,isCurrentPlayer,playerId,onDeal,table}:IProps) {
+function ComputerContainer({playerCards,isCurrentPlayer,playerId,onDeal,playCardTypeOnTable,gameState}:IProps) {
 
-  // useEffect(() => {
-  //   if(isCurrentPlayer) {
-  //     const card = (table.length === 1 || table.length === 0) ? selectRandomCard(playerCards) : selectDealOrHitCard(table[0].card.type, playerCards);
-  //     onDeal(playerId,card)
-      
-  //   }    
-  // },[isCurrentPlayer, playerCards])
+  const hasGameCompleted = gameState.numOfAvailablePlayers === 1;
+  const isWinner = gameState.winners[playerId];
+
+  useEffect(() => {
+    if(isCurrentPlayer && !isWinner && !hasGameCompleted) {
+      const card = !playCardTypeOnTable ? selectRandomCard(playerCards) : selectDealOrHitCard(playCardTypeOnTable, playerCards);
+     
+      // setTimeout(() => onDeal(playerId, card) ,3000)
+      onDeal(playerId, card)
+    }    
+
+    else if(isCurrentPlayer && isWinner && !hasGameCompleted) {
+       onDeal(playerId, null);
+    }
+
+    else if(isCurrentPlayer && isWinner && hasGameCompleted) {
+      onDeal(playerId,null)
+    }
+  },[isCurrentPlayer, playerCards, playCardTypeOnTable, isWinner, hasGameCompleted])
 
   return (
    <div className={`border-4 border-white-200 bg-none w-full mx-2 h-3/5 flex items-center justify-center shadow shadow-orange-500 ${getPlayerColor(playerId)}`}>

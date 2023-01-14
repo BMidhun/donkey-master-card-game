@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 import { CARD_TYPE_ENUM, PLAYERS_ENUM } from "../enums";
 import { ICard } from "../interface/card";
+import { IGameState } from "../interface/game";
 import { IPlayerState } from "../interface/player";
 import { groupCards, initPlayerCue, shuffleCards } from "../utils";
 
 const NUM_OF_PLAYERS = 4;
 
 
-interface IGameState {
-    numOfAvailablePlayers: number,
-    winners: PLAYERS_ENUM[];
-}
+
 
 
 function useGameInit() {
@@ -18,7 +16,12 @@ function useGameInit() {
     const [currentPlayerTracker, setCurrentPlayerTracker] = useState(0);
     const [gameState, setGameState] = useState<IGameState>({
         numOfAvailablePlayers: NUM_OF_PLAYERS,
-        winners: []
+        winners: {
+            [PLAYERS_ENUM.HUMAN] : false,
+        [PLAYERS_ENUM.COM1] : false,
+        [PLAYERS_ENUM.COM2] : false,
+        [PLAYERS_ENUM.COM3] : false,
+        }
     });
 
     const [playerState, setPlayerState] = useState<IPlayerState>({
@@ -68,38 +71,35 @@ function useGameInit() {
     }, [])  
  
 
-    function changePlayOrderTracker(newRoundPlayer?: PLAYERS_ENUM) {
-
-
-        if (newRoundPlayer) {
-            const index = currentPlayOrder.indexOf(newRoundPlayer);
-            if (index)
-                setCurrentPlayerTracker(index);
+    function changePlayOrderTracker(player: PLAYERS_ENUM | false) {
+        if(player === false) {
+            setCurrentPlayerTracker(-1);
             return;
         }
+          
+        const index = currentPlayOrder.indexOf(player);
 
-        setCurrentPlayerTracker(prev => {
-            if (prev === currentPlayOrder.length - 1)
-                return 0;
-            else
-                return prev + 1
-        });
-
-        return;
-
+        setCurrentPlayerTracker(index);
     }
 
-    function popPlayer(player: PLAYERS_ENUM) {
-        const indexOfPlayer = currentPlayOrder.indexOf(player);
-        let indexOfNextPlayer= indexOfPlayer === currentPlayOrder.length - 1 ? 0 : indexOfPlayer + 1;
+    function popPlayer(winners: PLAYERS_ENUM[]) {
+        // const indexOfPlayer = currentPlayOrder.indexOf(player);
+        // let indexOfNextPlayer= indexOfPlayer === currentPlayOrder.length - 1 ? 0 : indexOfPlayer + 1;
         
-        setCurrentPlayOrder(prev => prev.filter(val => val !== player));
-        setCurrentPlayerTracker(indexOfNextPlayer);
+        // setCurrentPlayOrder(prev => prev.filter(val => val !== player));
+        // setCurrentPlayerTracker(indexOfNextPlayer);
+
+        const newWinners = {...gameState.winners};
+
+        for(let player of winners) {
+            const k = (player as unknown) as PLAYERS_ENUM;
+            newWinners[k] = true;
+        }
+
         setGameState(prev => {
             return {
-                ...prev,
-                numOfAvailablePlayers: prev.numOfAvailablePlayers - 1,
-                winners: [...prev.winners, player]
+                numOfAvailablePlayers: NUM_OF_PLAYERS - winners.length,
+                winners: newWinners
             }
         })
     }
@@ -109,7 +109,7 @@ function useGameInit() {
             ...prev,
             [player]: {
                 ...prev[player],
-                [card.type]: prev[player][card.type].filter(_card => _card.value === card.value)
+                [card.type]: prev[player][card.type].filter(_card => _card.value !== card.value)
             }
         }))
     }
@@ -124,13 +124,15 @@ function useGameInit() {
     }
 
     useEffect(() => {
-        if(currentPlayOrder.length) {
-            checkWinner();
+        // console.log("PLAYER STATE::", gameState)
+        if(gameState.numOfAvailablePlayers === 1) {
+             window.alert("Game complete")
         }
-    },[playerState, currentPlayOrder])
+    },[gameState])
 
     function checkWinner() {
         const state = {...playerState};
+        let winners = [];
         for(let player of Object.keys(state)) {
             const key = (player as unknown) as PLAYERS_ENUM;
             if(state[key][CARD_TYPE_ENUM.CLUBS].length === 0 &&
@@ -139,13 +141,15 @@ function useGameInit() {
                 state[key][CARD_TYPE_ENUM.SPADE].length === 0
              )
              {
-                popPlayer(key);
+                winners.push(key);
              }
         }
+
+        popPlayer(winners);
     }
 
 
-    return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer, removeCardOnDeal, addCardsOnHit, gameState };
+    return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer, removeCardOnDeal, addCardsOnHit, gameState, checkWinner };
 }
 
 export default useGameInit;
