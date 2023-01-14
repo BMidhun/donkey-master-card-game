@@ -98,7 +98,7 @@ function App() {
   return (
     <div className="h-full bg-gradient-to-r from-purple-800 to-purple-900 p-4 flex flex-col">
 
-      <div className="flex items-center justify-between grow">
+      <div className="flex items-start justify-between grow max-h-48 md:max-h-64">
         <ComputerContainer playerId={PLAYERS_ENUM.COM1} playerCards={playerState[PLAYERS_ENUM.COM1]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM1} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>
         <ComputerContainer playerId={PLAYERS_ENUM.COM2} playerCards={playerState[PLAYERS_ENUM.COM2]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM2} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>
         <ComputerContainer playerId={PLAYERS_ENUM.COM3} playerCards={playerState[PLAYERS_ENUM.COM3]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM3} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>

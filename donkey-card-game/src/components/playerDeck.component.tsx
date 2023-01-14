@@ -2,6 +2,7 @@ import React from 'react'
 import { CARD_TYPE_ENUM, PLAYERS_ENUM } from '../enums';
 import { ICard, ICardSet } from '../interface/card'
 import { getPlayerColor } from '../utils';
+import Crown from "../assets/icons/crown.svg"
 
 interface IProps {
     playerCards: ICardSet;
@@ -15,6 +16,9 @@ function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IPr
   return (
     <>
    {!isWinner ? <div className={`my-2 rounded-lg flex items-baseline justify-between grow overflow-auto border-4 shadow shadow-grey-400 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)} ${ highlight ? "animate-pulse": "" }`}>
+        { isWinner ? <div className='absolute top-0 right-0 h-10 w-10 transform z-40'>
+          <img src={Crown}  className='h-full w-full'/>
+        </div> : null }
         {
         Object.keys(playerCards).map(item => {
              const k = (item as unknown) as CARD_TYPE_ENUM
