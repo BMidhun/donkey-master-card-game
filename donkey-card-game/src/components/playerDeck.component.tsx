@@ -23,7 +23,7 @@ function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IPr
                         
                         playerCards[k].map((card, index) => {
                             top = index * 8
-                            return  <div key={card.rank} className="cursor-pointer z-50" style={{position:"absolute", top:`${top}%`, transform:"scale(0.75)"}}
+                            return  <div key={card.rank} className="cursor-pointer z-30" style={{position:"absolute", top:`${top}%`, transform:"scale(0.75)"}}
                                       onClick={() => {onCardSelect(card)}}
                                     >
                                         <img src={card.imgSrc?.default} className="transition ease-in hover:-translate-y-6 "></img>

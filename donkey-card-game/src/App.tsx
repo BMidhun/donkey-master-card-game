@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { TableComponent } from "./components";
+import { useState } from "react";
+import { ScoreCard, TableComponent } from "./components";
+import ModalComponent from "./components/modal.component";
 import ComputerContainer from "./containers/computer/computer.container";
 import PlayerContainer from "./containers/player/player.container";
 import { PLAYERS_ENUM } from "./enums";
@@ -14,10 +15,6 @@ function App() {
 
   const { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, removeCardOnDeal, addCardsOnHit, gameState } = useGameInit();
   const [table, setTable] = useState<ITable>([]);
-
-  // console.log("CURRENT PLAYER::", currentPlayerTracker);
-
-  console.log("GAME STATE::", gameState)
 
 
   function compareTable(currentTable: ITable): ITableEntity | undefined {
@@ -57,12 +54,10 @@ function App() {
     }
 
     let currentTable: ITable = [...table, { player, card }];
-    // console.log("CURRENT TABLE::", currentTable);
     removeCardOnDeal(player, card);
     const hit = compareTable(currentTable);
 
     if (!hit && currentTable.length < gameState.numOfAvailablePlayers) {
-      console.log("Normal play");
       const nextPlayer = currentPlayOrder[currentPlayerTracker + 1]; 
       changePlayOrderTracker(
         nextPlayer !== undefined ? nextPlayer : currentPlayOrder[0]
@@ -72,15 +67,9 @@ function App() {
     }
 
     if (!hit && currentTable.length === gameState.numOfAvailablePlayers) {
-      console.log("Round complete");
-      // checkWinner();
       const newRoundPlayer = [...currentTable].sort((a, b) => b.card.rank - a.card.rank)[0];
-      // console.log(currentTable, "NEXT ROUND PLAYER::", newRoundPlayer);
       changePlayOrderTracker(false);
-      setTable(currentTable);
-
-      // setTimeout(() => checkWinner());
-  
+      setTable(currentTable);  
       setTimeout(() => {
         changePlayOrderTracker(newRoundPlayer.player);
         clearTable();
@@ -91,12 +80,10 @@ function App() {
 
     if (hit) {
       console.log("Hit!!")
-      // checkWinner();
       const penalties = currentTable.map(item => item.card);
       changePlayOrderTracker(false);
       addCardsOnHit(hit.player, penalties);
       setTable(currentTable);
-      // setTimeout(() => checkWinner());
 
       setTimeout(() => {
         clearTable();
@@ -108,7 +95,8 @@ function App() {
   }
 
   return (
-    <div className="h-full max-w-lg mx-auto bg-gradient-to-r from-purple-800 to-purple-900 p-4 flex flex-col">
+    <div className="h-full bg-gradient-to-r from-purple-800 to-purple-900 p-4 flex flex-col">
+
       <div className="flex items-center justify-between grow">
         <ComputerContainer playerId={PLAYERS_ENUM.COM1} playerCards={playerState[PLAYERS_ENUM.COM1]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM1} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>
         <ComputerContainer playerId={PLAYERS_ENUM.COM2} playerCards={playerState[PLAYERS_ENUM.COM2]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.COM2} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>
@@ -118,6 +106,11 @@ function App() {
       <TableComponent table={table}/>
 
       <PlayerContainer playerId={PLAYERS_ENUM.HUMAN} playerCards={playerState[PLAYERS_ENUM.HUMAN]} isCurrentPlayer={currentPlayOrder[currentPlayerTracker] === PLAYERS_ENUM.HUMAN} onDeal={onDeal} playCardTypeOnTable={table[0]?.card.type} gameState = {gameState}/>
+
+      <ModalComponent showModal={true} closeModal={() => {}} title="GAME STATS"> 
+        <ScoreCard gameState={gameState}/>
+      </ModalComponent>
+    
     </div>
   )
 }

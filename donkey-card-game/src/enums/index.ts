@@ -22,8 +22,8 @@ export enum CARD_VALUES_ENUM {
 }
 
 export enum PLAYERS_ENUM {
-    HUMAN,
-    COM1,
-    COM2,
-    COM3,
+    HUMAN = "HUMAN",
+    COM1 = "COM1",
+    COM2 = "COM2",
+    COM3 = "COM3",
 }
