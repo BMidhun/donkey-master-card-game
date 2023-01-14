@@ -123,12 +123,12 @@ function useGameInit() {
         setPlayerState(prev => ({ ...prev, [player]: cardSets }));
     }
 
+
     useEffect(() => {
-        // console.log("PLAYER STATE::", gameState)
-        if(gameState.numOfAvailablePlayers === 1) {
-             window.alert("Game complete")
+        if(currentPlayerTracker === -1) {
+            checkWinner();
         }
-    },[gameState])
+    },[currentPlayerTracker])
 
     function checkWinner() {
         const state = {...playerState};

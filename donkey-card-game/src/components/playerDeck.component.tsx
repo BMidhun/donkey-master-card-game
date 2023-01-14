@@ -6,14 +6,18 @@ import { getPlayerColor } from '../utils';
 interface IProps {
     playerCards: ICardSet;
     onCardSelect: (card:ICard) => void;
+    highlight: boolean;
+    isWinner: boolean
 }
 
-function PlayerDeckComponent({playerCards,onCardSelect}:IProps) {
+function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IProps) {
   let top=0;
   return (
     <>
-    <div className={`my-2 flex items-baseline justify-between grow overflow-auto border-4 shadow shadow-grey-400 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)}`}>
-        {Object.keys(playerCards).map(item => {
+    <div className={`my-2 flex items-baseline justify-between grow overflow-auto border-4 shadow shadow-grey-400 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)} ${ highlight ? "animate-pulse": "" }`}>
+        {
+        !isWinner ?
+        Object.keys(playerCards).map(item => {
              const k = (item as unknown) as CARD_TYPE_ENUM
              return <div key={item} className="h-full w-full relative">
                         {
@@ -27,7 +31,11 @@ function PlayerDeckComponent({playerCards,onCardSelect}:IProps) {
                                     </div>
                         })}
                     </div>
-        })}
+        })
+        
+        : "WINNER"
+        
+        }
     </div>
     <h4 className='text-center text-white bg-green-500'>User Deck</h4>
     </>

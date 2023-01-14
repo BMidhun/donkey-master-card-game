@@ -73,7 +73,7 @@ function App() {
 
     if (!hit && currentTable.length === gameState.numOfAvailablePlayers) {
       console.log("Round complete");
-      checkWinner();
+      // checkWinner();
       const newRoundPlayer = currentTable.sort((a, b) => b.card.rank - a.card.rank)[0];
       // console.log(currentTable, "NEXT ROUND PLAYER::", newRoundPlayer);
       changePlayOrderTracker(false);
@@ -91,7 +91,7 @@ function App() {
 
     if (hit) {
       console.log("Hit!!")
-      checkWinner();
+      // checkWinner();
       const penalties = currentTable.map(item => item.card);
       changePlayOrderTracker(false);
       addCardsOnHit(hit.player, penalties);

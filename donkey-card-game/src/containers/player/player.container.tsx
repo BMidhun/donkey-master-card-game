@@ -31,6 +31,10 @@ function PlayerContainer({playerCards,isCurrentPlayer,playerId, onDeal,playCardT
   // },[isCurrentPlayer, playerCards, playCardTypeOnTable])
 
   useEffect(() => {
+    
+    if(hasGameCompleted)
+      return;
+
     if(isCurrentPlayer && isWinner) {
       onDeal(playerId, null);
     }
@@ -53,8 +57,10 @@ function PlayerContainer({playerCards,isCurrentPlayer,playerId, onDeal,playCardT
     onDeal(playerId, card);
   }
 
+  const highlight = isCurrentPlayer && !isWinner && !hasGameCompleted
+
   return (
-    <PlayerDeckComponent playerCards={playerCards} onCardSelect={playerDeal}/>
+    <PlayerDeckComponent playerCards={playerCards} onCardSelect={playerDeal} highlight={highlight} isWinner={gameState.winners[playerId]}/>
   )
 }
 
