@@ -46,7 +46,7 @@ function ComputerContainer({playerCards,isCurrentPlayer,playerId,onDeal,playCard
 
   return (
    <div className={`border-4 rounded-lg border-white-200 bg-none w-full mx-2 h-3/5 flex items-center justify-center shadow shadow-grey-500 ${getPlayerColor(playerId)} ${ highlight ? "animate-pulse": "" }`}>
-      <h1 className="text-white">{isWinner ? "WINNER" : `COM: ${playerId}`}</h1>
+      <h1 className="text-white">{isWinner ? "WINNER" : `${playerId}`}</h1>
    </div>
   )
 }

@@ -39,7 +39,6 @@ function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IPr
     </div>
         
   }
-    <h4 className='text-center text-white bg-green-500 rounded'>User Deck</h4>
     </>
   )
 }
