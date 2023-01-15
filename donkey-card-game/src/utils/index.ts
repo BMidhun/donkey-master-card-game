@@ -59,8 +59,7 @@ export function shuffleCards():ICard[] {
 
 export function getCardImg(type: CARD_TYPE_ENUM, key: CARD_VALUES_ENUM) {
     try {
-        // const cardSrcImg = import(`../assets/cards/${type.toLowerCase()}/${type + '_' + key}.svg`);
-        const cardSrcImg = `/assets/cards/${type.toLowerCase()}/${type + '_' + key}.svg`;
+        const cardSrcImg = `/assets/cards/${type.toLowerCase()}/${type + '_' + key}.png`;
         return cardSrcImg;
     } catch (error) {
         return '';
@@ -137,6 +136,19 @@ export function getPlayerColor (player:PLAYERS_ENUM) : string {
         case PLAYERS_ENUM.COM1 : return "border-pink-600";
         case PLAYERS_ENUM.COM2 : return "border-yellow-600";
         case PLAYERS_ENUM.COM3 : return "border-indigo-600";
+        default: return ""
+    }
+}
+
+
+export function getPlayerShadow (player:PLAYERS_ENUM) : string {
+    switch(player) {
+      
+        
+        case PLAYERS_ENUM.HUMAN : return "shadow-lime-600";
+        case PLAYERS_ENUM.COM1 : return "shadow-pink-600";
+        case PLAYERS_ENUM.COM2 : return "shadow-yellow-600";
+        case PLAYERS_ENUM.COM3 : return "shadow-indigo-600";
         default: return ""
     }
 }

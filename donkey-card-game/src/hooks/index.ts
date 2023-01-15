@@ -1,4 +1,5 @@
 import useGameInit from "./useGameInit";
 import useGameModals from "./useGameModals";
 import useTable  from "./useTable";
-export {useGameInit, useGameModals, useTable}
+import usePlayerReady  from "./usePlayerReady";
+export {useGameInit, useGameModals, useTable, usePlayerReady}
