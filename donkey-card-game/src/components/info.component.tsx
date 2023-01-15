@@ -1,13 +1,8 @@
-import React from 'react'
-import Donkey from "../assets/icons/donkey.svg"
-import Instagram from "../assets/icons/instagram.svg";
-import GitHub from "../assets/icons/github.svg";
-
 function InfoComponent() {
   return (
     <div>
         <div className='text-bold text-xl text-center flex items-center justify-center'>
-          <img src={Donkey} alt='donkey.svg' className='w-7 mx-3'></img> Donkey Master</div>
+          <img src="/assets/icons/donkey.svg" alt='donkey.svg' className='w-7 mx-3'></img> Donkey Master</div>
         <h3 className='text-bold text-lg my-3 underline'>Game Walkthrough</h3>
         <ul className='list-inside list-disc'>
             <li>Donkey Master is a card game for four players that uses a deck of 52 cards.</li>
@@ -27,8 +22,8 @@ function InfoComponent() {
             Developed by Midhun Baby 
         </p>
         <ul className='my-4 flex items-center justify-evenly'>
-            <a href='https://www.instagram.com/b_midhun/' target={'_blank'} rel="noreferrer"><img src={Instagram} alt='insta.icon'/></a>
-            <a href='https://github.com/BMidhun' target={'_blank'} rel="noreferrer"><img src={GitHub} alt="github.icon"/></a>
+            <a href='https://www.instagram.com/b_midhun/' target={'_blank'} rel="noreferrer"><img src="/assets/icons/instagram.svg" alt='insta.icon'/></a>
+            <a href='https://github.com/BMidhun' target={'_blank'} rel="noreferrer"><img src="/assets/icons/github.svg" alt="github.icon"/></a>
         </ul>
     </div>
   )

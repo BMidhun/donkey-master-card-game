@@ -5,5 +5,6 @@ import ScoreCard from "./scoreCard";
 import Button from "./button.component";
 import ScreenComponent from "./screen.component";
 import InfoComponent from "./info.component";
-
-export {TableComponent, PlayerDeckComponent, ModalComponent, ScoreCard, Button, ScreenComponent,InfoComponent}
+import ComputerDeckComponent from "./computerDeck.component";
+import Spinner from "./spinner";
+export {TableComponent, PlayerDeckComponent, ModalComponent, ScoreCard, Button, ScreenComponent,InfoComponent,ComputerDeckComponent, Spinner}

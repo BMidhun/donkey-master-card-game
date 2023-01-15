@@ -2,8 +2,6 @@ import React from 'react'
 import { PLAYERS_ENUM } from '../enums';
 import { IGameState } from '../interface/game'
 import {Button} from './';
-import Crown from "../assets/icons/crown.svg";
-import Donkey from "../assets/icons/donkey.svg";
 
 interface IProps {
     gameState: IGameState
@@ -28,7 +26,7 @@ function ScoreCard({ gameState }: IProps) {
                             const k = (player as unknown) as PLAYERS_ENUM
                             return <tr key={player}>
                                      <td className='text-center'>{player}</td>
-                                     <td className='flex justify-center items-start'>{winners[k] ? <img src={Crown} alt="crown.svg" className='w-8'/> : <img src={Donkey} alt="donkey.svg" className='w-8'></img>}</td>
+                                     <td className='flex justify-center items-start'>{winners[k] ? <img src={"/assets/icons/crown.svg"} alt="crown.svg" className='w-8'/> : <img src={"/assets/icons/donkey.svg"} alt="donkey.svg" className='w-8'></img>}</td>
                                     </tr>
                         })}
                     </tbody>
