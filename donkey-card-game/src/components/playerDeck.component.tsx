@@ -11,7 +11,7 @@ function PlayerWinStateComponent() {
   >
     <div className="absolute top-0 right-0 h-10 w-10 transform z-40">
       <img
-        src="/assets/icons/crown.svg"
+        src="assets/icons/crown.svg"
         className="h-full w-full"
         alt="crown.svg"
       />

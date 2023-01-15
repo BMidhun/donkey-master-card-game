@@ -59,7 +59,7 @@ export function shuffleCards():ICard[] {
 
 export function getCardImg(type: CARD_TYPE_ENUM, key: CARD_VALUES_ENUM) {
     try {
-        const cardSrcImg = `/assets/cards/${type.toLowerCase()}/${type + '_' + key}.png`;
+        const cardSrcImg = `assets/cards/${type.toLowerCase()}/${type + '_' + key}.png`;
         return cardSrcImg;
     } catch (error) {
         return '';
