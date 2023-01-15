@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { PLAYERS_ENUM } from "../enums";
 import { ICard } from "../interface/card";
 import { ITable } from "../interface/table";
