@@ -1,4 +1,3 @@
-import React from 'react'
 import { CARD_TYPE_ENUM, PLAYERS_ENUM } from '../enums';
 import { ICard, ICardSet } from '../interface/card'
 import { getPlayerColor } from '../utils';
@@ -24,7 +23,7 @@ function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IPr
                         
                         playerCards[k].map((card, index) => {
                             top = index * 8
-                            return <img key={card.rank} src={card.imgSrc?.default} className="transition ease-in hover:-translate-y-6 cursor-pointer z-30 absolute transform scale-75" style={{top:`${top}%`}} onClick={() => {onCardSelect(card)}}></img>
+                            return <img key={card.rank} src={card.imgSrc?.default} className="transition ease-in hover:-translate-y-6 cursor-pointer z-30 absolute transform scale-75" style={{top:`${top}%`}} onClick={() => {onCardSelect(card)}} alt="card.svg"></img>
                         })}
                     </div>
         })}
@@ -33,7 +32,7 @@ function PlayerDeckComponent({playerCards,onCardSelect, isWinner, highlight}:IPr
 
     <div className={`my-2 rounded-lg flex items-center justify-center grow border-4 shadow-lg shadow-gray-700 relative ${getPlayerColor(PLAYERS_ENUM.HUMAN)}`}>
        <div className='absolute top-0 right-0 h-10 w-10 transform z-40'>
-          <img src={Crown}  className='h-full w-full'/>
+          <img src={Crown}  className='h-full w-full' alt="crown.svg"/>
         </div>
         <span className='text-white text-bold'>WINNER</span>
     </div>

@@ -26,8 +26,8 @@ function InfoComponent() {
             Developed by Midhun Baby 
         </div>
         <ul className='my-4 flex items-center justify-evenly'>
-            <a href='https://www.instagram.com/b_midhun/' target={'_blank'}><img src={Instagram} alt='insta.icon'/></a>
-            <a href='https://github.com/BMidhun' target={'_blank'}><img src={GitHub} alt="github.icon"/></a>
+            <a href='https://www.instagram.com/b_midhun/' target={'_blank'} rel="noreferrer"><img src={Instagram} alt='insta.icon'/></a>
+            <a href='https://github.com/BMidhun' target={'_blank'} rel="noreferrer"><img src={GitHub} alt="github.icon"/></a>
         </ul>
     </div>
   )

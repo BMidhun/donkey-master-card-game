@@ -1,4 +1,3 @@
-import { CARD_TYPE_ENUM, CARD_VALUES_ENUM } from "../enums"
 import { ICard } from "../interface/card";
 import { getCardRank } from "../utils";
 

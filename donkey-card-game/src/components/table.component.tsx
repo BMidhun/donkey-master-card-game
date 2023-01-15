@@ -1,5 +1,4 @@
 import React from 'react'
-import { PLAYERS_ENUM } from '../enums';
 import { ITable } from '../interface/table';
 import { getPlayerColor } from '../utils';
 

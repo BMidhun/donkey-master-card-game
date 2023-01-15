@@ -3,8 +3,7 @@ import PlayerDeckComponent from "../../components/playerDeck.component";
 import { CARD_TYPE_ENUM, PLAYERS_ENUM } from "../../enums";
 import { ICard, ICardSet } from "../../interface/card";
 import { IGameState } from "../../interface/game";
-import { ITable } from "../../interface/table";
-import { selectDealOrHitCard, selectRandomCard } from "../../utils";
+
 
 interface IProps {
     playerCards: ICardSet;
@@ -38,7 +37,7 @@ function PlayerContainer({playerCards,isCurrentPlayer,playerId, onDeal,playCardT
     if(isCurrentPlayer && isWinner) {
       onDeal(playerId, null);
     }
-  },[isCurrentPlayer, isWinner])
+  },[isCurrentPlayer, isWinner, hasGameCompleted, playerId, onDeal])
 
   function playerDeal(card:ICard) {
     if(!isCurrentPlayer || hasGameCompleted)
