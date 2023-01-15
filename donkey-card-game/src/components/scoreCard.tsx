@@ -26,7 +26,7 @@ function ScoreCard({ gameState }: IProps) {
                             const k = (player as unknown) as PLAYERS_ENUM
                             return <tr key={player}>
                                      <td className='text-center'>{player}</td>
-                                     <td className='flex justify-center items-start'>{winners[k] ? <img src={"/assets/icons/crown.svg"} alt="crown.svg" className='w-8'/> : <img src={"/assets/icons/donkey.svg"} alt="donkey.svg" className='w-8'></img>}</td>
+                                     <td className='flex justify-center items-start'>{winners[k] ? <img src={"assets/icons/crown.svg"} alt="crown.svg" className='w-8'/> : <img src={"assets/icons/donkey.svg"} alt="donkey.svg" className='w-8'></img>}</td>
                                     </tr>
                         })}
                     </tbody>
