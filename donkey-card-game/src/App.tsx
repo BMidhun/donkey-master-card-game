@@ -48,7 +48,7 @@ function App() {
 
 
   return (
-    <div className="h-full bg-gradient-to-r from-purple-800 to-purple-900 p-4 flex flex-col">
+    <div className="h-full bg-gradient-to-r from-violet-800 to-violet-900 p-4 flex flex-col">
       <div className="flex justify-between items-center my-3">
         <ScreenComponent text={screenText} />
         <div className="justify-self-end ml-auto">
