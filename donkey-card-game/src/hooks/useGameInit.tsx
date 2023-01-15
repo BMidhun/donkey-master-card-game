@@ -7,10 +7,6 @@ import { groupCards, initPlayerCue, shuffleCards } from "../utils";
 
 const NUM_OF_PLAYERS = 4;
 
-
-
-
-
 function useGameInit() {
     const [currentPlayOrder, setCurrentPlayOrder] = useState<PLAYERS_ENUM[]>([]);
     const [screenText, setScreenText] = useState<IScreenText | null>(null);
@@ -72,16 +68,7 @@ function useGameInit() {
     }, [])
 
 
-    // function changePlayOrderTracker(player: PLAYERS_ENUM | false) {
-    //     if(player === false) {
-    //         setCurrentPlayerTracker(-1);
-    //         return;
-    //     }
 
-    //     const index = currentPlayOrder.indexOf(player);
-
-    //     setCurrentPlayerTracker(index);
-    // }
 
     const changePlayOrderTracker = useCallback(function (player: PLAYERS_ENUM | false) {
         if (player === false) {
@@ -97,25 +84,7 @@ function useGameInit() {
 
 
     function popPlayer(winners: PLAYERS_ENUM[]) {
-        // const indexOfPlayer = currentPlayOrder.indexOf(player);
-        // let indexOfNextPlayer= indexOfPlayer === currentPlayOrder.length - 1 ? 0 : indexOfPlayer + 1;
 
-        // setCurrentPlayOrder(prev => prev.filter(val => val !== player));
-        // setCurrentPlayerTracker(indexOfNextPlayer);
-
-        // const newWinners = {...gameState.winners};
-
-        // for(let player of winners) {
-        //     const k = (player as unknown) as PLAYERS_ENUM;
-        //     newWinners[k] = true;
-        // }
-
-        // setGameState(prev => {
-        //     return prev.numOfAvailablePlayers === NUM_OF_PLAYERS - winners.length ? prev : ({
-        //         numOfAvailablePlayers: NUM_OF_PLAYERS - winners.length,
-        //         winners: newWinners
-        //     })
-        // })
 
         setGameState(prev => {
             const newWinners = { ...prev.winners };
@@ -143,12 +112,6 @@ function useGameInit() {
     }
 
     function addCardsOnHit(player: PLAYERS_ENUM, cards: ICard[]) {
-        // const cardSets = { ...playerState[player] };
-        // for (let card of cards) {
-        //     cardSets[card.type] = [...cardSets[card.type], card];
-        // }
-
-        // setPlayerState(prev => ({ ...prev, [player]: cardSets }));
 
         setPlayerState(prev => {
 
@@ -186,27 +149,6 @@ function useGameInit() {
             checkWinner();
         }
     }, [currentPlayerTracker, checkWinner])
-
-
-    // function checkWinner() {
-    //     const state = {...playerState};
-    //     let winners = [];
-    //     for(let player of Object.keys(state)) {
-    //         const key = (player as unknown) as PLAYERS_ENUM;
-    //         if(state[key][CARD_TYPE_ENUM.CLUBS].length === 0 &&
-    //             state[key][CARD_TYPE_ENUM.DIAMOND].length === 0 &&
-    //             state[key][CARD_TYPE_ENUM.HEART].length === 0 &&
-    //             state[key][CARD_TYPE_ENUM.SPADE].length === 0
-    //          )
-    //          {
-    //             winners.push(key);
-    //          }
-    //     }
-    //     if(winners.length)
-    //         popPlayer(winners);
-    // }
-
-
 
 
     return { playerState, currentPlayOrder, changePlayOrderTracker, currentPlayerTracker, popPlayer, removeCardOnDeal, addCardsOnHit, gameState, screenText, setScreenText };

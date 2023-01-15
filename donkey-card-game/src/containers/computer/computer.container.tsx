@@ -28,9 +28,7 @@ function ComputerContainer({playerCards,isCurrentPlayer,playerId,onDeal,playCard
 
     if(isCurrentPlayer && !isWinner && !hasGameCompleted) {
       const card = !playCardTypeOnTable ? selectRandomCard(playerCards) : selectDealOrHitCard(playCardTypeOnTable, playerCards);
-     
       setTimeout(() => onDeal(playerId, card) ,2000)
-      // onDeal(playerId, card)
     }    
 
     else if(isCurrentPlayer && isWinner && !hasGameCompleted) {

@@ -1,5 +1,5 @@
-import { CARD_TYPE_ENUM, PLAYERS_ENUM } from "../enums";
-import { ICard, ICardSet } from "./card";
+import { PLAYERS_ENUM } from "../enums";
+import { ICardSet } from "./card";
 
 export interface IPlayerState {
     [PLAYERS_ENUM.HUMAN]: ICardSet,

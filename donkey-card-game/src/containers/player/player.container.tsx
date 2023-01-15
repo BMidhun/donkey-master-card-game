@@ -20,15 +20,6 @@ function PlayerContainer({playerCards,isCurrentPlayer,playerId, onDeal,playCardT
   const hasGameCompleted = gameState.numOfAvailablePlayers === 1;
   const isWinner = gameState.winners[playerId];
 
-  // useEffect(() => {
-  //   if(isCurrentPlayer) {
-  //     const card = !playCardTypeOnTable ? selectRandomCard(playerCards) : selectDealOrHitCard(playCardTypeOnTable, playerCards);
-  //     // setTimeout(() =>  ,3000)
-  //     onDeal(playerId, card)
-      
-  //   }    
-  // },[isCurrentPlayer, playerCards, playCardTypeOnTable])
-
   useEffect(() => {
     
     if(hasGameCompleted)
