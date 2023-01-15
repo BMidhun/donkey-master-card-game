@@ -1,7 +1,7 @@
 import { ICard } from "../interface/card";
 import { getCardRank } from "../utils";
 
-export async function createCard (card:ICard):Promise<ICard> {
+export function createCard (card:ICard):ICard {
 
     const {type,imgSrc,value} = card;
 
