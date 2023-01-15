@@ -4,6 +4,7 @@ import {
   InfoComponent,
   ScoreCard,
   ScreenComponent,
+  Spinner,
   TableComponent,
 } from "./components";
 import ModalComponent from "./components/modal.component";
@@ -50,6 +51,7 @@ function App() {
   return (
     <div className="h-full bg-gradient-to-r from-violet-800 to-violet-900 p-4 flex flex-col">
       <div className="flex justify-between items-center my-3">
+        
         <ScreenComponent text={screenText} />
         <div className="justify-self-end ml-auto">
           <Button onClick={openInfoModal}>Info</Button>
@@ -91,7 +93,7 @@ function App() {
 
       <TableComponent table={table} />
 
-      <Suspense fallback={<p className="text-white text-center text-bold">Loading user deck....</p>}>
+      <Suspense fallback={<div className="flex items-center"><Spinner /><p className="text-white text-center text-bold">Loading user deck.... </p>  </div>}>
         <PlayerContainer
           playerId={PLAYERS_ENUM.HUMAN}
           playerCards={playerState[PLAYERS_ENUM.HUMAN]}

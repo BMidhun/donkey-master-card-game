@@ -1,9 +1,8 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { PLAYERS_ENUM } from "../enums";
 import { ICard } from "../interface/card";
 import { ITable } from "../interface/table";
 import { getPlayerShadow } from "../utils";
-import Spinner from "./spinner";
 
 interface IProps {
   table: ITable;
@@ -15,12 +14,6 @@ interface ITableCardProps {
 }
 
 function TableCardComponent({ card, player }: ITableCardProps) {
-  const [hasCardLoaded, setHasCardLoaded] = useState(false);
-
-  function updateCardLoadState() {
-    setHasCardLoaded(true);
-  }
-
   return (
     <Fragment>
       <img
@@ -29,19 +22,7 @@ function TableCardComponent({ card, player }: ITableCardProps) {
         className={`h-3/4 max-w-10 min-w-0 mx-2 p-1 rounded shadow-lg ${getPlayerShadow(
           player
         )}`}
-        onLoad={(e) => {
-          updateCardLoadState();
-        }}
       ></img>
-      {!hasCardLoaded ? (
-        <div
-          className={`h-3/4 max-w-10 mx-2 p-1 rounded shadow-lg flex items-center justify-center ${getPlayerShadow(
-            player
-          )}`}
-        >
-          <Spinner />
-        </div>
-      ) : null}
     </Fragment>
   );
 }
